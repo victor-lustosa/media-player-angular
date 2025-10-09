@@ -7,11 +7,11 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'app-simple-audio-player',
-  templateUrl: './simple-audio-player.component.html',
-  styleUrls: ['./simple-audio-player.component.scss'],
+  selector: 'app-media-player',
+  templateUrl: './media-player.component.html',
+  styleUrls: ['./media-player.component.scss'],
 })
-export class SimpleAudioPlayerComponent {
+export class MediaPlayerComponent {
   @Input() audioUrl!: string;
   @Input() audioTitle: string = 'Título do áudio';
   progressPercentage: number = 0;
@@ -24,7 +24,7 @@ export class SimpleAudioPlayerComponent {
   isMuted: boolean = false;
   currentTime: number = 0;
   duration: number = 0;
-  volume: number = 0.75;
+  volume: number = 0.8;
   private isDraggingProgress: boolean = false;
   private isDraggingVolume: boolean = false;
   constructor() {}

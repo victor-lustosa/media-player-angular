@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { SimpleAudioPlayerComponent } from '../simple-audio-player/simple-audio-player.component';
+import { MediaPlayerComponent } from '../media-player/media-player.component';
 interface AudioTrack {
   title: string;
   format: string;
@@ -16,8 +16,8 @@ export class HomeComponent {
   displayAudioModal: boolean = false;
   selectedTrack: AudioTrack | null = null;
 
-  @ViewChild(SimpleAudioPlayerComponent) audioPlayer:
-    | SimpleAudioPlayerComponent
+  @ViewChild(MediaPlayerComponent) audioPlayer:
+    | MediaPlayerComponent
     | undefined;
 
   tracks: AudioTrack[] = [
@@ -50,6 +50,21 @@ export class HomeComponent {
       title: 'Exemplo de Áudio AAC',
       format: 'AAC',
       url: 'assets/audios/formato-aac.aac',
+    },
+     {
+      title: 'Exemplo de Video MKV',
+      format: 'MKV',
+      url: 'assets/videos/formato-mkv.mkv',
+    },
+     {
+      title: 'Exemplo de Video AVI',
+      format: 'AVI',
+      url: 'assets/videos/formato-avi.avi',
+    },
+     {
+      title: 'Exemplo de Video WMV',
+      format: 'WMV',
+      url: 'assets/videos/formato-wmv.wmv',
     },
   ];
 

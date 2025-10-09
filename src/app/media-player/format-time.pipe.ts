@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'formatTime' // <-- Este é o nome que o Angular procura
+  name: 'formatTime'
 })
 export class FormatTimePipe implements PipeTransform {
 
