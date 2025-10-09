@@ -5,13 +5,12 @@
 
 .player-container {
   max-width: 720px;
-  height: 180px;
+  height: 190px;
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  /* 1. Transforma o container em uma coluna flexível */
   display: flex;
   flex-direction: column;
 }
@@ -23,7 +22,6 @@
   padding: 15px 15px;
   background-color: #005ca9;
   color: white;
-  /* Garante que o header não encolha */
   flex-shrink: 0;
 }
 
@@ -41,10 +39,10 @@
   cursor: pointer;
 }
 
-.column { /* Regra para os textos de tempo */
+.column {
   display: flex;
   justify-content: space-between;
-  padding: 10px 15px 0 15px; /* Adiciona padding, remove o de baixo */
+  padding: 10px 15px 0 15px;
 }
 
 .progress-wrapper {
@@ -52,7 +50,7 @@
   align-items: center;
   gap: 10px;
   width: 100%;
-  padding: 5px 0; /* Adiciona um respiro vertical */
+  padding: 5px 0;
 }
 
 .time {
@@ -63,7 +61,7 @@
 }
 
 .progress-bar-wrapper {
-  margin: 0px 15px 0px 15px;
+  margin: 0px 20px 0px 20px;
   flex-grow: 1;
   height: 8px;
   background-color: #e0e0e0;
@@ -94,10 +92,9 @@
   width: 75%;
 }
 
-/* 2. Regras corrigidas para o container dos controles */
 .controls-wrapper {
-  margin-top: 20px; /* <-- A MÁGICA ACONTECE AQUI! */
-  padding-bottom: 10px; /* Padding desejado */
+  margin-top: 35px;
+  padding-bottom: 10px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -115,7 +112,7 @@
 
 .volume-control {
   display: flex;
-  margin-left: 15px;
+  margin-left: 20px;
   align-items: center;
   gap: 8px;
 }
