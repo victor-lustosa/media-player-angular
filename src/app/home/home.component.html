@@ -1,0 +1,30 @@
+<div class="home-container" style="text-align: center; margin-top: 20%; margin-left: 18%;margin-right: 18%;">
+
+  <p-card header="Formatos do MTR" subheader="Selecione um formato para tocar">
+    <div class="track-list" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; ">
+      <p-button
+        *ngFor="let track of tracks"
+        [label]="track.format"
+        (click)="playTrack(track)"
+        styleClass="p-button-secondary p-button-outlined">
+      </p-button>
+    </div>
+  </p-card>
+</div>
+
+<p-dialog
+  *ngIf="displayAudioModal && selectedTrack"
+  [header]="selectedTrack.title"
+  [(visible)]="displayAudioModal"
+  [modal]="true"
+  [style]="{width: '90vw', maxWidth: '720px'}"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="onModalHide()">
+
+  <app-simple-audio-player
+    [audioUrl]="selectedTrack.url"
+    [audioTitle]="selectedTrack.title">
+  </app-simple-audio-player>
+
+</p-dialog>

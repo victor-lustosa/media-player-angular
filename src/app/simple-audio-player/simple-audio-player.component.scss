@@ -1,0 +1,161 @@
+:host {
+  display: block;
+  font-family: Arial, sans-serif;
+}
+
+.player-container {
+  max-width: 720px;
+  height: 180px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  /* 1. Transforma o container em uma coluna flexível */
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 15px;
+  background-color: #005ca9;
+  color: white;
+  /* Garante que o header não encolha */
+  flex-shrink: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.column { /* Regra para os textos de tempo */
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px 0 15px; /* Adiciona padding, remove o de baixo */
+}
+
+.progress-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 5px 0; /* Adiciona um respiro vertical */
+}
+
+.time {
+  font-size: 0.8rem;
+  color: #555;
+  min-width: 40px;
+  text-align: center;
+}
+
+.progress-bar-wrapper {
+  margin: 0px 15px 0px 15px;
+  flex-grow: 1;
+  height: 8px;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: #005CA9;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+.volume-bar-wrapper {
+  width: 70px;
+  height: 5px;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.volume-bar-fill {
+  height: 100%;
+  background-color: #005CA9;
+  width: 75%;
+}
+
+/* 2. Regras corrigidas para o container dos controles */
+.controls-wrapper {
+  margin-top: 20px; /* <-- A MÁGICA ACONTECE AQUI! */
+  padding-bottom: 10px; /* Padding desejado */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+
+.main-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.volume-control {
+  display: flex;
+  margin-left: 15px;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn,
+.play-pause-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.play-pause-btn {
+  width: 42px;
+  height: 42px;
+  background-color: #005CA9;
+  border-radius: 4px;
+}
+
+.icon-btn .pi {
+  font-size: 15px;
+  color: #005CA9;
+}
+
+.icon-btn.border-button {
+  border: 1px solid #005CA9;
+  border-radius: 4px;
+  width: 34px;
+  height: 34px;
+}
+
+.volume-control .icon-btn .pi {
+  color: #005CA9;
+  font-size: 15px;
+}
+
+.play-pause-btn .pi {
+  font-size: 22px;
+  color: white;
+}
