@@ -1,44 +1,66 @@
-<div class="player-container">
-  <audio #audioPlayer [src]="audioUrl" (loadedmetadata)="onMetadataLoaded()" (timeupdate)="onTimeUpdate()"
-    (ended)="isPlaying = false"></audio>
+<div #playerContainer class="player-container" [class.video-mode]="mediaType === 'video'">
 
   <div class="header">
-    <h3 class="title">{{ audioTitle }}</h3>
+    <h3 class="title">{{ mediaTitle }}</h3>
     <button class="close-btn">&times;</button>
   </div>
 
+  <video *ngIf="mediaType === 'video'"
+         #mediaElement
+         class="media-element"
+         [src]="mediaUrl"
+         (loadedmetadata)="onMetadataLoaded()"
+         (timeupdate)="onTimeUpdate()"
+         (ended)="isPlaying = false"
+         (click)="playPause()">
+  </video>
+  <audio *ngIf="mediaType === 'audio'"
+         #mediaElement
+         [src]="mediaUrl"
+         (loadedmetadata)="onMetadataLoaded()"
+         (timeupdate)="onTimeUpdate()"
+         (ended)="isPlaying = false">
+  </audio>
 
-  <div class="column" style="display: flex; justify-content: space-between; padding: 13px 15px 2px 15px;">
-    <span class="time">{{ currentTime | formatTime }}</span>
-    <span class="time">{{ duration | formatTime }}</span>
-  </div>
-
-  <div class="progress-wrapper">
-    <div #progressBarWrapper class="progress-bar-wrapper" (mousedown)="onSeekStart($event)">
-      <div class="progress-bar-fill" [style.width.%]="progressPercentage"></div>
+  <div class="media-controls">
+    <div class="column" style="display: flex; justify-content: space-between; padding: 2px 15px;">
+      <span class="time">{{ currentTime | formatTime }}</span>
+      <span class="time">{{ duration | formatTime }}</span>
     </div>
-  </div>
-  <div class="controls-wrapper">
-    <div class="volume-control">
-      <button class="icon-btn" (click)="toggleMute()">
-    <i [class]="isMuted || volume === 0 ? 'pi pi-volume-off' : 'pi pi-volume-up'"></i>
-  </button>
-  <div
-    #volumeBarWrapper class="volume-bar-wrapper"
-    (mousedown)="onVolumeDragStart($event)"> <div class="volume-bar-fill" [style.width.%]="volume * 100"></div>
-  </div>
+
+    <div class="progress-wrapper">
+      <div #progressBarWrapper class="progress-bar-wrapper" (mousedown)="onSeekStart($event)">
+        <div class="progress-bar-fill" [style.width.%]="progressPercentage"></div>
+      </div>
     </div>
 
-    <div class="main-controls">
-      <button class="icon-btn border-button" (click)="skip(-10)">
-        <i class="pi pi-step-backward"></i>
-      </button>
-      <button class="play-pause-btn" (click)="playPause()">
-        <i [class]="isPlaying ? 'pi pi-pause' : 'pi pi-caret-right'"></i>
-      </button>
-      <button class="icon-btn border-button" (click)="skip(10)">
-        <i class="pi pi-step-forward"></i>
-      </button>
+    <div class="controls-wrapper">
+      <div class="volume-control">
+        <button class="icon-btn" (click)="toggleMute()">
+          <i [class]="isMuted || volume === 0 ? 'pi pi-volume-off' : 'pi pi-volume-up'"></i>
+        </button>
+        <div #volumeBarWrapper class="volume-bar-wrapper" (mousedown)="onVolumeDragStart($event)">
+          <div class="volume-bar-fill" [style.width.%]="volume * 100"></div>
+        </div>
+      </div>
+
+      <div class="main-controls">
+        <button class="icon-btn border-button" (click)="skip(-10)">
+          <i class="pi pi-step-backward"></i>
+        </button>
+        <button class="play-pause-btn" (click)="playPause()">
+          <i [class]="isPlaying ? 'pi pi-pause' : 'pi pi-caret-right'"></i>
+        </button>
+        <button class="icon-btn border-button" (click)="skip(10)">
+          <i class="pi pi-step-forward"></i>
+        </button>
+      </div>
+
+      <div class="fullscreen-control">
+        <button *ngIf="mediaType === 'video'" class="icon-btn" (click)="toggleFullscreen()">
+          <i [class]="isFullscreen ? 'pi pi-compress' : 'pi pi-expand'"></i>
+        </button>
+      </div>
     </div>
   </div>
 </div>

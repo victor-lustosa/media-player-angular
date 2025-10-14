@@ -1,30 +1,32 @@
-<div class="home-container" style="text-align: center; margin-top: 20%; margin-left: 18%;margin-right: 18%;">
+<div class="home-container" style="
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
+  ">
+  <div class="track-list-header" style=" margin-bottom: 30px;">Formatos do MTR</div>
 
-  <p-card header="Formatos do MTR" subheader="Selecione um formato para tocar">
-    <div class="track-list" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; ">
-      <p-button
-        *ngFor="let track of tracks"
-        [label]="track.format"
-        (click)="playTrack(track)"
+  <p-card>
+    <div class="track-list" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap">
+      <p-button *ngFor="let track of audioTracks" [label]="track.format" (click)="playMedia(track)"
         styleClass="p-button-secondary p-button-outlined">
+      </p-button>
+    </div>
+  </p-card>
+  <p-card>
+    <div class="track-list" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap">
+      <p-button *ngFor="let track of videoTracks" [label]="track.format" (click)="playMedia(track)"
+        styleClass="p-button-raised p-button-info">
       </p-button>
     </div>
   </p-card>
 </div>
 
-<p-dialog
-  *ngIf="displayAudioModal && selectedTrack"
-  [header]="selectedTrack.title"
-  [(visible)]="displayAudioModal"
-  [modal]="true"
-  [style]="{width: '90vw', maxWidth: '720px'}"
-  [draggable]="false"
-  [resizable]="false"
+<p-dialog *ngIf="displayMediaModal && selectedMedia" [header]="selectedMedia.title" [(visible)]="displayMediaModal"
+  [modal]="true" [style]="{ width: '90vw', maxWidth: '800px' }" [draggable]="false" [resizable]="false"
   (onHide)="onModalHide()">
-
-  <app-media-player
-    [audioUrl]="selectedTrack.url"
-    [audioTitle]="selectedTrack.title">
+  <app-media-player [mediaUrl]="selectedMedia.url" [mediaTitle]="selectedMedia.title" [mediaType]="selectedMedia.type">
   </app-media-player>
-
 </p-dialog>

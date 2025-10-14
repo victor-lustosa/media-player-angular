@@ -1,9 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { MediaPlayerComponent } from '../media-player/media-player.component';
-interface AudioTrack {
+
+interface MediaTrack {
   title: string;
   format: string;
   url: string;
+  type: 'audio' | 'video';
 }
 
 @Component({
@@ -12,68 +14,82 @@ interface AudioTrack {
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
+  displayMediaModal: boolean = false;
+  selectedMedia: MediaTrack | null = null;
 
-  displayAudioModal: boolean = false;
-  selectedTrack: AudioTrack | null = null;
-
-  @ViewChild(MediaPlayerComponent) audioPlayer:
+  @ViewChild(MediaPlayerComponent) mediaPlayer:
     | MediaPlayerComponent
     | undefined;
 
-  tracks: AudioTrack[] = [
+  audioTracks: MediaTrack[] = [
     {
-      title: 'Exemplo de Áudio MP3',
+      title: 'Áudio MP3',
       format: 'MP3',
       url: 'assets/audios/formato-mp3.mp3',
+      type: 'audio',
     },
     {
-      title: 'Exemplo de Áudio WAV',
+      title: 'Áudio WAV',
       format: 'WAV',
       url: 'assets/audios/formato-wav.wav',
+      type: 'audio',
     },
     {
-      title: 'Exemplo de Áudio MP4 (Áudio)',
-      format: 'MP4',
-      url: 'assets/audios/formato-mp4.mp4'
-    },
-    {
-      title: 'Exemplo de Áudio OGG',
+      title: 'Áudio OGG',
       format: 'OGG',
       url: 'assets/audios/formato-ogg.ogg',
+      type: 'audio',
     },
     {
-      title: 'Exemplo de Áudio FLAC',
+      title: 'Áudio FLAC',
       format: 'FLAC',
       url: 'assets/audios/formato-flac.flac',
+      type: 'audio',
     },
     {
-      title: 'Exemplo de Áudio AAC',
+      title: 'Áudio AAC',
       format: 'AAC',
       url: 'assets/audios/formato-aac.aac',
-    },
-     {
-      title: 'Exemplo de Video MKV',
-      format: 'MKV',
-      url: 'assets/videos/formato-mkv.mkv',
-    },
-     {
-      title: 'Exemplo de Video AVI',
-      format: 'AVI',
-      url: 'assets/videos/formato-avi.avi',
-    },
-     {
-      title: 'Exemplo de Video WMV',
-      format: 'WMV',
-      url: 'assets/videos/formato-wmv.wmv',
+      type: 'audio',
     },
   ];
 
-playTrack(track: AudioTrack): void {
-    this.selectedTrack = track;
-    this.displayAudioModal = true;
+  videoTracks: MediaTrack[] = [
+    {
+      title: 'Vídeo MP4 de Exemplo',
+      format: 'MP4',
+      url: 'https://www.w3schools.com/html/mov_bbb.mp4',
+      type: 'video',
+    },
+    {
+      title: 'Vídeo MKV de Exemplo',
+      format: 'MKV',
+      url: 'assets/videos/exemplo.mkv',
+      type: 'video',
+    },
+    {
+      title: 'Vídeo AVI de Exemplo',
+      format: 'AVI',
+      url: 'assets/videos/exemplo.avi',
+      type: 'video',
+    },
+    {
+      title: 'Vídeo WMV de Exemplo',
+      format: 'WMV',
+      url: 'assets/videos/exemplo.wmv',
+      type: 'video',
+    },
+  ];
+
+  constructor() {}
+
+  playMedia(media: MediaTrack): void {
+    this.selectedMedia = media;
+    this.displayMediaModal = true;
   }
 
-  onModalHide() {
-    this.audioPlayer?.pause();
+  onModalHide(): void {
+    this.mediaPlayer?.pause();
+    this.selectedMedia = null;
   }
 }
