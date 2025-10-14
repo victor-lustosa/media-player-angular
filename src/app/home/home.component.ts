@@ -52,29 +52,36 @@ export class HomeComponent {
       url: 'assets/audios/formato-aac.aac',
       type: 'audio',
     },
+    {
+      title: 'Audio MP4',
+      format: 'MP4',
+      url: 'assets/audios/formato-mp4.mp4',
+      type: 'video',
+    },
   ];
 
   videoTracks: MediaTrack[] = [
     {
-      title: 'Vídeo MP4 de Exemplo',
+      title: 'Vídeo MP4',
       format: 'MP4',
       url: 'assets/videos/formato-mp4.mp4',
       type: 'video',
     },
+
     {
-      title: 'Vídeo MKV de Exemplo',
+      title: 'Vídeo MKV',
       format: 'MKV',
       url: 'assets/videos/formato-mkv.mkv',
       type: 'video',
     },
     {
-      title: 'Vídeo AVI de Exemplo',
+      title: 'Vídeo AVI',
       format: 'AVI',
       url: 'assets/videos/formato-avi.avi',
       type: 'video',
     },
     {
-      title: 'Vídeo WMV de Exemplo',
+      title: 'Vídeo WMV',
       format: 'WMV',
       url: 'assets/videos/formato-wmv.wmv',
       type: 'video',

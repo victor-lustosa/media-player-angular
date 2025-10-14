@@ -5,6 +5,7 @@ import {
   EventEmitter,
   ViewChild,
   ElementRef,
+  ChangeDetectorRef,
   HostListener,
 } from '@angular/core';
 
@@ -35,15 +36,12 @@ export class MediaPlayerComponent {
   private isDraggingProgress: boolean = false;
   private isDraggingVolume: boolean = false;
 
-  constructor() {}
+  constructor(private cdr: ChangeDetectorRef) { }
 
   @HostListener('window:mousemove', ['$event'])
   onDragMove(event: MouseEvent): void {
-    if (this.isDraggingProgress) {
-      this.seek(event);
-    } else if (this.isDraggingVolume) {
-      this.setVolume(event);
-    }
+    if (this.isDraggingProgress) this.seek(event);
+    else if (this.isDraggingVolume) this.setVolume(event);
   }
 
   @HostListener('window:mouseup', ['$event'])
@@ -55,20 +53,17 @@ export class MediaPlayerComponent {
   @HostListener('document:fullscreenchange', ['$event'])
   onFullscreenChange(event: Event): void {
     this.isFullscreen = !!document.fullscreenElement;
+    this.cdr.detectChanges(); // Força a atualização da tela
   }
 
   onMetadataLoaded(): void {
-    if (this.mediaElementRef) {
-      this.duration = this.mediaElementRef.nativeElement.duration;
-    }
+    if (this.mediaElementRef) this.duration = this.mediaElementRef.nativeElement.duration;
   }
 
   onTimeUpdate(): void {
     if (this.mediaElementRef && !this.isDraggingProgress) {
       this.currentTime = this.mediaElementRef.nativeElement.currentTime;
-      if (this.duration > 0) {
-        this.progressPercentage = (this.currentTime / this.duration) * 100;
-      }
+      if (this.duration > 0) this.progressPercentage = (this.currentTime / this.duration) * 100;
     }
   }
 
@@ -76,18 +71,14 @@ export class MediaPlayerComponent {
     if (!this.mediaElementRef?.nativeElement) return;
     const media: HTMLMediaElement = this.mediaElementRef.nativeElement;
 
-    if (this.isPlaying) {
-      media.pause();
-    } else {
-      media.play().catch(error => console.error("Erro ao tocar mídia:", error));
-    }
+    if (this.isPlaying) media.pause();
+    else media.play().catch(error => console.error("Erro ao tocar mídia:", error));
+
     this.isPlaying = !this.isPlaying;
   }
 
   skip(seconds: number): void {
-    if (this.mediaElementRef?.nativeElement) {
-      this.mediaElementRef.nativeElement.currentTime += seconds;
-    }
+    if (this.mediaElementRef?.nativeElement) this.mediaElementRef.nativeElement.currentTime += seconds;
   }
 
   toggleMute(): void {
@@ -99,11 +90,9 @@ export class MediaPlayerComponent {
 
   toggleFullscreen(): void {
     if (this.mediaType !== 'video') return;
-    if (!this.isFullscreen) {
-      this.playerContainerRef.nativeElement.requestFullscreen();
-    } else {
-      document.exitFullscreen();
-    }
+
+    if (!this.isFullscreen) this.playerContainerRef.nativeElement.requestFullscreen();
+    else document.exitFullscreen();
   }
 
   onSeekStart(event: MouseEvent): void {
@@ -115,12 +104,9 @@ export class MediaPlayerComponent {
     if (this.isDraggingProgress && this.duration > 0 && this.progressBarRef?.nativeElement) {
       const progressBar = this.progressBarRef.nativeElement;
       const progressBarRect = progressBar.getBoundingClientRect();
-      let clickPositionX = event.clientX - progressBarRect.left;
-
-      clickPositionX = Math.max(0, Math.min(progressBarRect.width, clickPositionX));
-
-      const newTime = (clickPositionX / progressBarRect.width) * this.duration;
-      this.mediaElementRef.nativeElement.currentTime = newTime;
+      let pos = (event.clientX - progressBarRect.left) / progressBarRect.width;
+      pos = Math.max(0, Math.min(1, pos));
+      this.mediaElementRef.nativeElement.currentTime = pos * this.duration;
       this.onTimeUpdate();
     }
   }
@@ -134,13 +120,9 @@ export class MediaPlayerComponent {
     if (this.isDraggingVolume && this.volumeBarRef?.nativeElement) {
       const volumeBar = this.volumeBarRef.nativeElement;
       const volumeBarRect = volumeBar.getBoundingClientRect();
-      let clickPositionX = event.clientX - volumeBarRect.left;
-
-      clickPositionX = Math.max(0, Math.min(volumeBarRect.width, clickPositionX));
-
-      const newVolume = clickPositionX / volumeBarRect.width;
-
-      this.volume = newVolume;
+      let pos = (event.clientX - volumeBarRect.left) / volumeBarRect.width;
+      pos = Math.max(0, Math.min(1, pos));
+      this.volume = pos;
       this.mediaElementRef.nativeElement.volume = this.volume;
       this.isMuted = this.volume === 0;
     }
@@ -152,6 +134,7 @@ export class MediaPlayerComponent {
       this.isPlaying = false;
     }
   }
+
   onClose(): void {
     this.pause();
     this.closePlayer.emit();

@@ -1,4 +1,4 @@
-<div #playerContainer class="player-container" [class.video-mode]="mediaType === 'video'">
+<div #playerContainer class="player-container" [class.video-mode]="mediaType === 'video'" >
 
   <div class="header">
     <h3 class="title">{{ mediaTitle }}</h3>
@@ -58,7 +58,7 @@
 
       <div class="fullscreen-control">
         <button *ngIf="mediaType === 'video'" class="icon-btn" (click)="toggleFullscreen()">
-          <i [class]="isFullscreen ? 'pi pi-compress' : 'pi pi-expand'"></i>
+          <i [class]="isFullscreen ? 'pi pi-window-minimize' : 'pi pi-window-maximize'"></i>
         </button>
       </div>
     </div>

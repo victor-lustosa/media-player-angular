@@ -83,9 +83,10 @@
 
 .controls-wrapper {
   margin-top: 30px;
+    width: 100%;
   padding-bottom: 20px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   position: relative;
 }
@@ -121,6 +122,10 @@
   transform: translate(-50%);
 }
 
+.fullscreen-control {
+  margin-right: 15px;
+}
+
 .icon-btn,
 .play-pause-btn {
   background: none;
@@ -154,6 +159,22 @@
 .volume-control .icon-btn .pi {
   color: #005CA9;
   font-size: 15px;
+}
+
+.header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Espaço entre o botão de minimizar e o de fechar */
+}
+
+.minimize-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px; /* Tamanho do ícone de minimizar */
+  cursor: pointer;
+  padding: 0;
+  line-height: 1; /* Alinhamento vertical */
 }
 
 .play-pause-btn .pi {
