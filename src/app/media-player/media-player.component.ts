@@ -1,6 +1,8 @@
 import {
   Component,
   Input,
+  Output,
+  EventEmitter,
   ViewChild,
   ElementRef,
   HostListener,
@@ -16,6 +18,7 @@ export class MediaPlayerComponent {
   @Input() mediaUrl!: string;
   @Input() mediaTitle!: string;
   @Input() mediaType: 'audio' | 'video' = 'audio';
+  @Output() closePlayer = new EventEmitter<void>();
 
   @ViewChild('mediaElement') mediaElementRef!: ElementRef<HTMLMediaElement>;
   @ViewChild('playerContainer') playerContainerRef!: ElementRef<HTMLElement>;
@@ -148,5 +151,9 @@ export class MediaPlayerComponent {
       this.mediaElementRef.nativeElement.pause();
       this.isPlaying = false;
     }
+  }
+  onClose(): void {
+    this.pause();
+    this.closePlayer.emit();
   }
 }

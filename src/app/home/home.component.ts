@@ -58,25 +58,25 @@ export class HomeComponent {
     {
       title: 'Vídeo MP4 de Exemplo',
       format: 'MP4',
-      url: 'https://www.w3schools.com/html/mov_bbb.mp4',
+      url: 'assets/videos/formato-mp4.mp4',
       type: 'video',
     },
     {
       title: 'Vídeo MKV de Exemplo',
       format: 'MKV',
-      url: 'assets/videos/exemplo.mkv',
+      url: 'assets/videos/formato-mkv.mkv',
       type: 'video',
     },
     {
       title: 'Vídeo AVI de Exemplo',
       format: 'AVI',
-      url: 'assets/videos/exemplo.avi',
+      url: 'assets/videos/formato-avi.avi',
       type: 'video',
     },
     {
       title: 'Vídeo WMV de Exemplo',
       format: 'WMV',
-      url: 'assets/videos/exemplo.wmv',
+      url: 'assets/videos/formato-wmv.wmv',
       type: 'video',
     },
   ];

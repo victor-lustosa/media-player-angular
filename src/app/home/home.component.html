@@ -1,32 +1,67 @@
-<div class="home-container" style="
+<div
+  class="home-container"
+  style="
     text-align: center;
     display: flex;
     flex-direction: column;
     margin-top: 10%;
-    margin-left: 20%;
-    margin-right: 20%;
-  ">
-  <div class="track-list-header" style=" margin-bottom: 30px;">Formatos do MTR</div>
+    margin-left: 30%;
+    margin-right: 30%;
+  "
+>
+  <div
+    class="track-list-header"
+    style="margin-bottom: 45px; font-family: Arial, sans-serif; font-size: 20px"
+  >
+    Formatos do MTR
+  </div>
 
   <p-card>
-    <div class="track-list" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap">
-      <p-button *ngFor="let track of audioTracks" [label]="track.format" (click)="playMedia(track)"
-        styleClass="p-button-secondary p-button-outlined">
+    <div
+      class="track-list"
+      style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap"
+    >
+      <p-button
+        *ngFor="let track of audioTracks"
+        [label]="track.format"
+        (click)="playMedia(track)"
+        styleClass="p-button-secondary p-button-outlined"
+      >
       </p-button>
     </div>
   </p-card>
+  <div style="height: 20px"></div>
   <p-card>
-    <div class="track-list" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap">
-      <p-button *ngFor="let track of videoTracks" [label]="track.format" (click)="playMedia(track)"
-        styleClass="p-button-raised p-button-info">
+    <div
+      class="track-list"
+      style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap"
+    >
+      <p-button
+        *ngFor="let track of videoTracks"
+        [label]="track.format"
+        (click)="playMedia(track)"
+        styleClass="p-button-raised p-button-info"
+      >
       </p-button>
     </div>
   </p-card>
 </div>
 
-<p-dialog *ngIf="displayMediaModal && selectedMedia" [header]="selectedMedia.title" [(visible)]="displayMediaModal"
-  [modal]="true" [style]="{ width: '90vw', maxWidth: '800px' }" [draggable]="false" [resizable]="false"
-  (onHide)="onModalHide()">
-  <app-media-player [mediaUrl]="selectedMedia.url" [mediaTitle]="selectedMedia.title" [mediaType]="selectedMedia.type">
+<p-dialog
+  *ngIf="displayMediaModal && selectedMedia"
+  [header]="selectedMedia.title"
+  [(visible)]="displayMediaModal"
+  [modal]="true"
+  [style]="{ width: '90vw', maxWidth: '800px' }"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="onModalHide()"
+>
+  <app-media-player
+    [mediaUrl]="selectedMedia.url"
+    [mediaTitle]="selectedMedia.title"
+    [mediaType]="selectedMedia.type"
+    (closePlayer)="displayMediaModal = false"
+  >
   </app-media-player>
 </p-dialog>
