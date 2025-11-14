@@ -1,4 +1,4 @@
-# PocMediaPlayer
+# Poc Media Player
 
 Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 15.2.11.
 
